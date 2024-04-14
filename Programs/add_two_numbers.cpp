@@ -1,67 +1,101 @@
 //C++ Program to add 2 numbers using a singly linked list
 #include <iostream>
 
-struct ListNode 
-{
+class Node {
+public:
     int val;
-    ListNode* next;
-    ListNode(int x) : val(x), next(NULL) {}
+    Node* next;
+
+    Node(int value) : val(value), next(NULL) {}
 };
 
-ListNode* addTwoNumbers(ListNode* list1, ListNode* list2) 
-{
-     ListNode* dummy = new ListNode(0);
-        ListNode* temp = dummy;
-        int carry = 0;
-        while(list1 || list2 || carry)
+class LinkedList {
+private:
+    Node* head;
+
+public:
+    LinkedList() : head(NULL) {}
+
+    void add(int value) 
+    {
+        Node* node = new Node(value);
+        if (head == NULL) 
         {
-            int sum = 0;
-            if(list1 != NULL)
-            {
-                sum += list1->val;
-                list1 = list1->next;
-            }
-            if(list2 != NULL)
-            {
-                sum += list2->val;
-                list2=list2->next;
-            }
-            sum += carry;
-            carry = sum/10;
-            ListNode* newnode = new ListNode(sum % 10);
-            temp->next = newnode;
+            head = node;
+            return;
+        }
+        Node* temp = head;
+        while (temp->next != NULL) 
+        {
             temp = temp->next;
         }
-        return dummy->next;
-}
-
-void printList(ListNode* head) 
-{
-    ListNode* current = head;
-    while (current != NULL) 
-    {
-	std::cout<<current->val<<" -> ";
-        current = current->next;
+        temp->next = node;
+        node->next = NULL;
     }
-    std::cout<<"NULL"<<std::endl;
-}
+
+    static LinkedList addTwoNumbers(LinkedList list1, LinkedList list2) 
+    {
+        LinkedList result;
+        Node* l1 = list1.head;
+        Node* l2 = list2.head;
+        int carry = 0;
+
+        while (l1 != NULL || l2 != NULL || carry) 
+        {
+            int sum = 0;
+            if(l1 != NULL)
+            {
+                sum += l1->val;
+                l1 = l1->next;
+            }
+            if(l2 != NULL)
+            {
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            sum += carry;
+            carry = sum / 10;
+
+            result.add(sum % 10);
+        }
+        return result;
+    }
+
+    void printList() {
+        Node* temp = head;
+        while (temp != NULL) 
+        {
+            std::cout<<temp->val<<" ";
+            temp = temp->next;
+        }
+    }
+
+
+};
 
 int main() 
 {
-    // Create two linked lists representing numbers
-    ListNode* list1 = new ListNode(2);
-    list1->next = new ListNode(4);
-    list1->next->next = new ListNode(3);
+    // Create two linked lists
+    LinkedList list1;
+    LinkedList list2;
 
-    ListNode* list2 = new ListNode(5);
-    list2->next = new ListNode(6);
-    list2->next->next = new ListNode(4);
+    // Add to list1 : 321
+    list1.add(1);
+    list1.add(2);
+    list1.add(3);
 
-    // Add the numbers represented by the linked lists
-    ListNode* result = addTwoNumbers(list1, list2);
+    // Add to list2: 765
+    list2.add(5);
+    list2.add(6);
+    list2.add(7);
 
-    // Print the result
-    printList(result);
+    // Add the two lists
+    LinkedList result;
+    result = LinkedList::addTwoNumbers(list1, list2);
+
+    // Display the result
+    std::cout<<"Sum: ";
+    result.printList();
 
     return 0;
 }
