@@ -3,7 +3,7 @@
 #include<vector>
 
 //find the minimum distance from the source to other vertices, which are not yet visited.
-int minDistance(vector<int> dist, vector<bool> visited, int vertices)
+int minDistance(std::vector<int> dist, std::vector<bool> visited, int vertices)
 {
 	// Initialize min value
 	int min = INT_MAX, min_index;
@@ -22,19 +22,22 @@ int minDistance(vector<int> dist, vector<bool> visited, int vertices)
 
 // A utility function to print the constructed distance
 // array
-void printSolution(vector<int> dist, int n)
+void printSolution(std::vector<int> dist, int n)
 {
-	cout<<"Distance from Source"<<endl;
+	std::cout<<"Distance from Source"<<std::endl;
 	for (int i = 0; i < n; i++)
-		cout<<i<<" -> "<<dist[i]<<endl;
+	{
+		std::cout<<i<<" -> "<<dist[i]<<std::endl;
+	}
+
 }
 
 //Find the shportest paths from single source to all other vertices
-void dijkstra(vector<vector<int>>& graph, int src)
+void dijkstra(std::vector<std::vector<int>>& graph, int src)
 {
 	int vertices = graph.size();
-	vector<int> dist(vertices, INT_MAX);
-	vector<bool> visited(vertices, false);
+	std::vector<int> dist(vertices, INT_MAX);
+	std::vector<bool> visited(vertices, false);
 
 	// Distance of source vertex from itself is always 0
 	dist[src] = 0;
@@ -65,19 +68,19 @@ void dijkstra(vector<vector<int>>& graph, int src)
 int main()
 {
 	int vertices = 0, source = 0;
-	cout<<"Enter number of vertices : "<<endl;
-	cin>>vertices;
+	std::cout<<"Enter number of vertices : "<<std::endl;
+	std::cin>>vertices;
 	
-	vector<vector<int>> graph(vertices, vector<int>(vertices, 0)); 
+	std::vector<std::vector<int>> graph(vertices, std::vector<int>(vertices, 0)); 
 	
-	cout<<"Enter the source vertex : "<<endl;
-	cin>>source;
-	cout<<"Enter the adjacency matrix. Enter 0 if there is no path : "<<endl;
+	std::cout<<"Enter the source vertex : "<<std::endl;
+	std::cin>>source;
+	std::cout<<"Enter the adjacency matrix. Enter 0 if there is no path : "<<std::endl;
 	for(int i = 0; i < vertices; i++)
 	{
 	    for(int j = 0; j < vertices; j++)
 	    {
-	        cin>>graph[i][j];
+		    std::cin>>graph[i][j];
 	    }
 	}
 	
