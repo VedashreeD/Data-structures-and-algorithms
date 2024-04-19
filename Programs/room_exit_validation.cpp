@@ -34,8 +34,8 @@ int main()
             enter_order.erase(enter_order.begin());
             continue;
         }
-        //search for the right position of the student and then erase it, increment count of 
-        //wrongly exited students
+        //search for the right position of the person and then erase it, increment count of 
+        //wrongly exited people
         for(int i = 0; i < exit_order.size(); i++)
         {
             if(enter_order[i] == exit_order[j])
