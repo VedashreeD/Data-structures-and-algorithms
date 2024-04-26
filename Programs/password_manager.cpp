@@ -102,7 +102,7 @@ int main() {
     //first user is named admin, they have admin rights, their usernames and passwords are stored in 
     //the "admin.txt" paramter and the master key to access the created file is "bq654"
     //user1 details
-    User user1("alice", true, "alice_passwords.txt", "bq654");
+    User user1("alice", true, "alice_passwords.txt", "9876h");
     user1.addPassword("somedomain1.com", "alice@example.com", "het326");
     user1.addPassword("somedomain2.com", "Bob@domain.com", "29fndk");
     
@@ -114,8 +114,8 @@ int main() {
     User user3("lisa", true, "lisa_passwords.txt", "865sdf");
     user3.addPassword("somedomain4.com", "l@domain4.com", "cef87k");
 
-    user1.getPassword("bq654", "somedomain2.com");
-    user1.getPassword("bq654", "tom@somedomain.com");
+    user1.getPassword("9876h", "somedomain2.com");
+    user1.getPassword("9876h", "tom@somedomain.com");
     user2.getPassword("298fjkb", "goo.com");
     user3.getPassword("wrongmasterkey", "l@domain4.com");
     
