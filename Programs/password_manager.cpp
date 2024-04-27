@@ -96,6 +96,15 @@ public:
     void changeAdminRights(bool adminRights) {
         isAdmin = adminRights;
     }
+    void getPassword(std::string key, std::string account) 
+    {
+        if (!isAdmin) 
+	{
+	    std::cout<<"You don't have permission to access passwords." <<std::endl;
+            return;
+        }
+        PasswordVault::getPassword(key, account);
+    }
 };
 
 int main() {
