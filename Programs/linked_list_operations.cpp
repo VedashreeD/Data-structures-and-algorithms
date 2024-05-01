@@ -59,15 +59,41 @@ public:
         head = prev;
     }
 
+    //Remove Nth node from the end of the list
+    void removeNthFromEnd(int remove_node) 
+    {
+        Node *fast = head;
+        Node *slow = head;
+        for (int i = 0; i < remove_node; i++) //fast goes to nth ele from starting index.
+        {
+            fast = fast->next;
+        }    
+        if (!fast) //if fast = NULL, return head+1 ele.
+        {
+            head = head->next;
+	    return;
+        }
+        while (fast->next) //traverse fast to 2nd last ele, and slow to n-1th ele from end.
+        {
+            fast = fast->next, slow = slow->next;
+        } 
+        slow->next = slow->next->next;
+        
+         
+
+    }
+
     //print the linked list
     void display() 
     {
         Node* temp = head;
+	std::cout<<"HEAD -> ";
         while (temp != NULL) 
 	{
-	    std::cout << temp->data << " ";
+	    std::cout<< temp->data << " -> ";
             temp = temp->next;
         }
+	std::cout<<"NULL"<<std::endl;
     }
 
 };
@@ -83,13 +109,19 @@ int main() {
     for (int i = 0; i < n; i++) 
     {
         int value;
-	std::cin >> value;
+	std::cin>>value;
         list.insert(value);
     }
 
     list.reverse();
 
     std::cout<<"Reversed linked list: "<<std::endl;
+    list.display();
+
+    int remove_node = 0;
+    std::cout<<"Enter a position(starting from 0) within the linked list to be removed : "<<std::endl;
+    std::cin>>remove_node;
+    list.removeNthFromEnd(remove_node);
     list.display();
 
     return 0;
