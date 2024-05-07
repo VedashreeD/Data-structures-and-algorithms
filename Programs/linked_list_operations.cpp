@@ -8,6 +8,7 @@ public:
     Node* next;
 
     Node(int value) : data(value), next(NULL) {}
+    Node(int value, Node *next) : data(value), next(next) {}
 };
 
 class LinkedList 
@@ -77,11 +78,30 @@ public:
         {
             fast = fast->next, slow = slow->next;
         } 
-        slow->next = slow->next->next;
-        
-         
+        slow->next = slow->next->next;  
 
     }
+
+    //program to double the value in a linked list
+    void doubleValue() 
+    {
+        int carry = twice(head);
+        if (carry > 0) 
+        {
+            head = new Node(carry, head);
+        }
+    }
+    //helper function to double the linked list values
+    int twice(Node* head) 
+    {
+        if (head == nullptr) {
+            return 0;
+        }
+        int doubledValue = head->data * 2 + twice(head->next);
+        head->data = doubledValue % 10;
+        return doubledValue / 10;
+    }
+
 
     //print the linked list
     void display() 
@@ -124,5 +144,10 @@ int main() {
     list.removeNthFromEnd(remove_node);
     list.display();
 
+    std::cout<<"Double the values in the linked list : "<<std::endl;
+    list.doubleValue();
+    list.display();
+
     return 0;
 }
+
