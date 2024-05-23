@@ -65,6 +65,7 @@ class RabinKarp
 int main() 
 {
     std::string text, pattern;
+    int prime = 101;
     std::cout << "Enter the text: ";
     getline(std::cin, text);
     std::cout << "Enter the pattern to search for: ";
@@ -72,7 +73,8 @@ int main()
 
     //larger prime numbers reduce chance of hash collisions
     //good to choose larger prime number than alphabet size and the pattern size
-    int prime = 101;
+    std::cout<<"Enter the prime number: ";
+    std::cin>>prime;
     RabinKarp rk;
     rk.search(pattern, text, prime);
     
